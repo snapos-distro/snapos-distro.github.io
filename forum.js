@@ -140,7 +140,8 @@
   }
 
   window.addEventListener("hashchange", route);
-  fetch(DATA, { cache: "no-cache" })
+  // the minute in the address gets past the 5-minute cache of raw.githubusercontent.com
+  fetch(DATA + "?m=" + Math.floor(Date.now() / 60000), { cache: "no-cache" })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function (d) { data = d && typeof d === "object" ? d : { topics: [] }; route(); })
     .catch(function () {
