@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Living with SnapOS · SnapOS handbook</title><link rel="stylesheet" href="/style.css"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
+<header><nav><a class="brand" href="/"><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png" alt="">SnapOS</a><a href="/handbook/">Handbook</a><a href="https://github.com/snapos-distro/SnapOS/releases/latest">Download</a><a href="https://github.com/snapos-distro">GitHub</a></nav></header>
+<main>
+<h1>Living with SnapOS</h1>
+<p class="tag">Every change is a line in a file, and every change can be undone.</p>
+<img class="wide" src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snappy-commands.gif" alt="apt commands and their snapos names">
+<h2>Programs</h2>
+<table>
+<tr><th>You want to</th><th>SnapOS</th><th>NixOS underneath</th></tr>
+<tr><td>search</td><td><code>snapos find vlc</code></td><td><code>nix search nixpkgs vlc</code></td></tr>
+<tr><td>install</td><td><code>snapos add vlc</code></td><td>add it to the config, <code>nixos-rebuild switch</code></td></tr>
+<tr><td>remove</td><td><code>snapos remove vlc</code></td><td>remove it from the config, rebuild</td></tr>
+<tr><td>just try it</td><td><code>snapos shell vlc</code></td><td><code>nix shell nixpkgs#vlc</code></td></tr>
+</table>
+<h2>Changing the system</h2>
+<p>Open the files with <code>snapos config</code>, change a line, then apply:</p>
+<pre><code>snapos diff          # what would change
+snapos rebuild       # apply now
+snapos rebuild --next-boot   # for kernel and driver changes</code></pre>
+<p>A desktop added later is one line in <code>local.nix</code>: <code>snapos.desktop = "plasma";</code>, then <code>snapos rebuild</code>.</p>
+<h2>Undoing</h2>
+<pre><code>snapos generations   # the systems you can go back to
+snapos rollback      # back to the previous one
+snapos gc            # free disk space</code></pre>
+<p>Older systems are also in the boot menu.</p>
+<h2>Updates</h2>
+<img class="wide" src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snappy-updates.gif" alt="the steps of snapos update">
+<p>At every login SnapOS looks for a new release and newer packages, and offers them. <code>snapos update</code> builds the new system for the next start; if it does not reach the login screen, SnapOS goes back by itself.</p>
+<h2>SnapGuard and .deb files</h2>
+<pre><code>snapguard scan ~/Downloads
+snapguard status
+snap-deb program.deb   # scanned first, then installed in the Debian layer</code></pre>
+<h2>When something breaks</h2>
+<pre><code>snapos doctor        # graphics, boot, network and antivirus
+snapos log           # the output of the last rebuild
+snapos rebuild --trace</code></pre>
+</main>
+<footer>SnapOS · <a href="https://github.com/snapos-distro">github.com/snapos-distro</a> · <a href="https://www.tiktok.com/@snapos.distro">TikTok</a> · <a href="https://youtu.be/hVY7DnYpyjY">YouTube</a><br>AI assisted (Sonnet 5, Fable 5.1, Opus 5.5)</footer>
+</body></html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Installing by hand · SnapOS handbook</title><link rel="stylesheet" href="/style.css"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
+<header><nav><a class="brand" href="/"><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png" alt="">SnapOS</a><a href="/handbook/">Handbook</a><a href="https://github.com/snapos-distro/SnapOS/releases/latest">Download</a><a href="https://github.com/snapos-distro">GitHub</a></nav></header>
+<main>
+<h1>Installing by hand</h1>
+<p class="tag">With the SnapOS minimal USB, the NixOS way.</p>
+<div class="note">Every command on this page is typed by a virtual machine in the SnapOS test repository, so the steps are checked on each change.</div>
+<ol class="steps">
+<li><h3>Start the minimal USB</h3>
+<p>Flash the minimal image with <a href="https://etcher.balena.io">balenaEtcher</a> and start the computer from it. You get a terminal, already logged in. Commands that change the disk need <code>sudo</code>.</p></li>
+<li><h3>Connect to the internet</h3>
+<p>A cable works by itself. For Wi-Fi:</p>
+<pre><code>nmtui</code></pre>
+<p>Choose <i>Activate a connection</i>, pick your network, type the password. Check with <code>ping -c 2 nixos.org</code>.</p></li>
+<li><h3>Partition the disk</h3>
+<p>Find your disk (a <code>disk</code> of the right size; <code>vda</code>, <code>sda</code> or <code>nvme0n1</code>):</p>
+<pre><code>lsblk</code></pre>
+<p>Then make two partitions: a small one to start the computer, and the rest for SnapOS. <b>This erases the disk.</b> With the disk <code>/dev/sda</code>:</p>
+<pre><code>sudo parted -s /dev/sda -- mklabel gpt \
+  mkpart ESP fat32 1MiB 512MiB set 1 esp on \
+  mkpart root ext4 512MiB 100%</code></pre></li>
+<li><h3>Format and mount</h3>
+<pre><code>sudo mkfs.fat -F 32 -n boot /dev/sda1
+sudo mkfs.ext4 -L nixos /dev/sda2
+sudo mount /dev/disk/by-label/nixos /mnt
+sudo mkdir -p /mnt/boot
+sudo mount -o umask=077 /dev/disk/by-label/boot /mnt/boot</code></pre>
+<p>On an NVMe disk the partitions are <code>/dev/nvme0n1p1</code> and <code>/dev/nvme0n1p2</code>.</p></li>
+<li><h3>Prepare SnapOS</h3>
+<pre><code>snapos init</code></pre>
+<p>This detects your hardware and puts the SnapOS files in <code>/mnt/etc/snapos</code>. In NixOS the same step is <code>nixos-generate-config --root /mnt</code>.</p></li>
+<li><h3>Choose</h3>
+<pre><code>sudo nano /mnt/etc/snapos/local.nix</code></pre>
+<p>This small file is your system: its name, time zone, language, keyboard, desktop, look and your user.</p>
+<pre><code>networking.hostName = "snapos";
+time.timeZone = "America/Sao_Paulo";
+i18n.defaultLocale = "pt_BR.UTF-8";
+console.keyMap = "br-abnt2";
+services.xserver.xkb.layout = "br";
+snapos.desktop = "xfce";        # budgie, plasma, xfce or hyprland
+snapos.appearance = "dark";     # dark or light
+users.users.ana = { isNormalUser = true; extraGroups = [ "wheel" "networkmanager" ]; };</code></pre>
+<p>Save with <kbd>Ctrl</kbd>+<kbd>O</kbd>, close with <kbd>Ctrl</kbd>+<kbd>X</kbd>.</p></li>
+<li><h3>Install</h3>
+<pre><code>snapos install</code></pre>
+<p>SnapOS builds the system described in the files and downloads what it needs, then asks a password for each user. In NixOS this is <code>nixos-install --flake</code>.</p></li>
+<li><h3>Restart</h3>
+<pre><code>reboot</code></pre>
+<p>Remove the USB stick. SnapOS starts, and the same files now live in <code>/etc/snapos</code>: change them any time and apply with <code>snapos rebuild</code>.</p></li>
+</ol>
+<p><a class="btn" href="daily.html">Next: living with SnapOS →</a></p>
+</main>
+<footer>SnapOS · <a href="https://github.com/snapos-distro">github.com/snapos-distro</a> · <a href="https://www.tiktok.com/@snapos.distro">TikTok</a> · <a href="https://youtu.be/hVY7DnYpyjY">YouTube</a><br>AI assisted (Sonnet 5, Fable 5.1, Opus 5.5)</footer>
+</body></html>
