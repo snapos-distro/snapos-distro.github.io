@@ -66,7 +66,7 @@ sudo mount -o umask=077 /dev/sda1 /mnt/boot</code></pre>
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    snapos.url = "github:snapos-distro/SnapOS";
+    snapos.url = "https://github.com/snapos-distro/snapos-updates/releases/latest/download/snapos-source.tar.gz";
     snapos.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -78,7 +78,7 @@ sudo mount -o umask=077 /dev/sda1 /mnt/boot</code></pre>
     };
   };
 }</code></pre>
-<p><code>nixpkgs</code> is the collection with every program, at the NixOS 26.05 line. <code>snapos</code> brings the packs, and <code>follows</code> makes them use the same nixpkgs as you. <code>mypc</code> is the name of your system: you use it when installing and rebuilding. Save with <kbd>Ctrl</kbd>+<kbd>O</kbd>, close with <kbd>Ctrl</kbd>+<kbd>X</kbd>.</p>
+<p><code>nixpkgs</code> is the collection with every program, at the NixOS 26.05 line. <code>snapos</code> brings the packs from the newest release in <a href="https://github.com/snapos-distro/snapos-updates/releases">snapos-updates</a>, the same place every SnapOS updates from, and <code>follows</code> makes them use the same nixpkgs as you. <code>mypc</code> is the name of your system: you use it when installing and rebuilding. Save with <kbd>Ctrl</kbd>+<kbd>O</kbd>, close with <kbd>Ctrl</kbd>+<kbd>X</kbd>.</p>
 <h2 id="config">Writing configuration.nix</h2>
 <p>Replace the generated file with your own. The whole file is at the end of this chapter; the next sections explain each part.</p>
 <pre><code>sudo nano /mnt/etc/snapos/configuration.nix</code></pre>
