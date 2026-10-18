@@ -1,15 +1,41 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Handbook · SnapOS</title><link rel="stylesheet" href="/style.css"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
-<header><nav><a class="brand" href="/"><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png" alt="">SnapOS</a><a href="/handbook/">Handbook</a><a href="https://github.com/snapos-distro/SnapOS/releases/latest">Download</a><a href="https://github.com/snapos-distro">GitHub</a></nav></header>
-<main>
-<h1>The SnapOS handbook</h1>
-<p class="tag">Install SnapOS by hand, then live with it.</p>
-<p>The handbook follows what you do with the <b>minimal USB</b>: a terminal and no installer with questions. You partition the disk, describe the system you want in one file, and SnapOS builds it. Everything you learn here is how NixOS works too.</p>
-<div class="grid">
-  <div class="card"><h3><a href="install.html">1. Installing by hand</a></h3>Connect, partition, format, mount, <code>snapos init</code>, choose, <code>snapos install</code>.</div>
-  <div class="card"><h3><a href="daily.html">2. Living with SnapOS</a></h3>Programs, changes, undo, updates, SnapGuard and <code>.deb</code> files.</div>
+<title>Handbook – SnapOS Linux</title><link rel="stylesheet" href="/style.css"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
+<div class="top"><div class="wrap"><a class="logo" href="/"><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png" alt=""><span><b>snapos</b> linux</span></a><a class="get" href="/downloads.html">Get SnapOS!</a></div></div>
+<div class="menu"><div class="wrap">
+<a href="/">Home</a><a href="/downloads.html">Downloads</a><a href="/handbook/" class="on">Handbook</a><a href="/news.html">News</a><a href="https://github.com/snapos-distro">Source code</a><a href="https://github.com/snapos-distro/SnapOS/issues">Support</a></div></div>
+<div class="wrap" style="padding:28px 18px 50px">
+<div class="toc"><h4>SnapOS Handbook</h4>
+<div class="grp">Installing by hand</div>
+<a href="install.html#about">About the minimal USB</a><a href="install.html#start">Starting the USB</a><a href="install.html#network">Configuring the network</a><a href="install.html#disks">Preparing the disks</a><a href="install.html#format">Formatting and mounting</a><a href="install.html#init">Preparing SnapOS</a><a href="install.html#choose">Choosing your system</a><a href="install.html#install">Installing</a><a href="install.html#reboot">Restarting</a>
+<div class="grp">Working with SnapOS</div>
+<a href="daily.html#programs">Programs</a><a href="daily.html#changes">Changing the system</a><a href="daily.html#undo">Undoing</a><a href="daily.html#updates">Updates</a><a href="daily.html#guard">SnapGuard and .deb files</a><a href="daily.html#trouble">When something breaks</a>
 </div>
-</main>
-<footer>SnapOS · <a href="https://github.com/snapos-distro">github.com/snapos-distro</a> · <a href="https://www.tiktok.com/@snapos.distro">TikTok</a> · <a href="https://youtu.be/hVY7DnYpyjY">YouTube</a><br>AI assisted (Sonnet 5, Fable 5.1, Opus 5.5)</footer>
-</body></html>
+<h1 class="title">SnapOS Handbook</h1>
+<p>The SnapOS Handbook is the guide to installing SnapOS by hand from the <b>minimal USB</b> and to living with it afterwards. Every step also says what it is called in NixOS, so what you learn here works on NixOS too.</p>
+<h2>Installing by hand</h2>
+<dl>
+<dt><a href="install.html#about">About the minimal USB</a></dt><dd>What the minimal image is, and how it differs from the installer.</dd>
+<dt><a href="install.html#network">Configuring the network</a></dt><dd>A cable works by itself; Wi-Fi with <code>nmtui</code>.</dd>
+<dt><a href="install.html#disks">Preparing the disks</a></dt><dd>Finding the disk and making the partitions with <code>parted</code>.</dd>
+<dt><a href="install.html#format">Formatting and mounting</a></dt><dd>File systems, labels, and the new system at <code>/mnt</code>.</dd>
+<dt><a href="install.html#init">Preparing SnapOS</a></dt><dd><code>snapos init</code>: the hardware and the SnapOS files on the disk.</dd>
+<dt><a href="install.html#choose">Choosing your system</a></dt><dd><code>local.nix</code>: name, language, keyboard, desktop, look and users.</dd>
+<dt><a href="install.html#install">Installing</a></dt><dd><code>snapos install</code> builds the system and sets the passwords.</dd>
+</dl>
+<h2>Working with SnapOS</h2>
+<dl>
+<dt><a href="daily.html#programs">Programs</a></dt><dd>Find, add, remove and try programs.</dd>
+<dt><a href="daily.html#changes">Changing the system</a></dt><dd>Edit the files, see the difference, rebuild.</dd>
+<dt><a href="daily.html#undo">Undoing</a></dt><dd>Generations, rollback and cleaning.</dd>
+<dt><a href="daily.html#updates">Updates</a></dt><dd>Releases and packages, and how an update undoes itself.</dd>
+<dt><a href="daily.html#guard">SnapGuard and .deb files</a></dt><dd>The antivirus and the Debian layer.</dd>
+<dt><a href="daily.html#trouble">When something breaks</a></dt><dd>Diagnosis, logs and the full error.</dd>
+</dl>
+</div>
+<footer><div class="wrap">
+<div><h5>SnapOS</h5><a href="/">Home</a><a href="/downloads.html">Downloads</a><a href="/news.html">News</a></div>
+<div><h5>Documentation</h5><a href="/handbook/">Handbook</a><a href="/handbook/install.html">Installing by hand</a><a href="https://github.com/snapos-distro/SnapOS#readme">README</a></div>
+<div><h5>Code</h5><a href="https://github.com/snapos-distro/SnapOS">SnapOS</a><a href="https://github.com/snapos-distro/snapos-test">snapos-test</a><a href="https://github.com/snapos-distro/snapos-updates">snapos-updates</a></div>
+<div><h5>Follow</h5><a href="https://www.tiktok.com/@snapos.distro">TikTok</a><a href="https://youtu.be/hVY7DnYpyjY">YouTube</a></div>
+</div><div class="bottom">SnapOS · MIT license · AI assisted (Sonnet 5, Fable 5.1, Opus 5.5)</div></footer></body></html>

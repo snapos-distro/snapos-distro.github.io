@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Downloads – SnapOS Linux</title><link rel="stylesheet" href="/style.css"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
+<div class="top"><div class="wrap"><a class="logo" href="/"><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png" alt=""><span><b>snapos</b> linux</span></a><a class="get" href="/downloads.html">Get SnapOS!</a></div></div>
+<div class="menu"><div class="wrap">
+<a href="/">Home</a><a href="/downloads.html" class="on">Downloads</a><a href="/handbook/">Handbook</a><a href="/news.html">News</a><a href="https://github.com/snapos-distro">Source code</a><a href="https://github.com/snapos-distro/SnapOS/issues">Support</a></div></div>
+<div class="wrap page"><main>
+<h1 class="title">Downloads</h1>
+<p>Every image is a USB stick image: flash it with <a href="https://etcher.balena.io">balenaEtcher</a> and start the computer from it. Each one has a <code>.sha256</code> file to check the download.</p>
+<h2>Releases</h2>
+<h3>Installer (net install)</h3>
+<p>The installer asks eleven questions (network, keyboard, language, time zone, disk, account, desktop, look, graphics) and installs SnapOS by itself.</p>
+<div class="dl">
+  <div class="card"><h3>x86_64</h3><div class="arch">PCs and laptops with Intel or AMD, BIOS or UEFI</div><a class="btn" href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer.iso">Download</a><div class="small"><a href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer.iso.sha256">SHA-256</a> · about 1.7 GB</div></div>
+  <div class="card"><h3>ARM64</h3><div class="arch">ARM computers that start with UEFI</div><a class="btn" href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer-aarch64.iso">Download</a><div class="small"><a href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer-aarch64.iso.sha256">SHA-256</a> · about 1.7 GB</div></div>
+</div>
+<div class="note">From SnapOS 2.6 the installer downloads the newest SnapOS while it installs, so an older USB stick always installs the latest version. Until then it installs the version on the stick, and SnapOS updates itself after the first start.</div>
+<h3>Minimal</h3>
+<p>A terminal and no installer with questions: you build your SnapOS step by step, the NixOS way. Smaller and closer to how NixOS works.</p>
+<div class="dl">
+  <div class="card"><h3>x86_64</h3><div class="arch">PCs and laptops with Intel or AMD</div><span class="soon">Arrives with SnapOS 2.6</span></div>
+  <div class="card"><h3>ARM64</h3><div class="arch">ARM computers that start with UEFI</div><span class="soon">Arrives with SnapOS 2.6</span></div>
+</div>
+<p><b>Installing with the minimal image?</b> Follow the handbook: <a href="/handbook/install.html">Installing by hand →</a></p>
+<h2>Which one?</h2>
+<table><tr><th></th><th>Installer</th><th>Minimal</th></tr>
+<tr><td>For</td><td>Everyone</td><td>People who want to learn how the system is built</td></tr>
+<tr><td>How</td><td>Answer questions</td><td>Type the handbook's commands</td></tr>
+<tr><td>Desktop</td><td>Chosen in the installer</td><td>Chosen in <code>local.nix</code></td></tr>
+<tr><td>Result</td><td colspan="2">The same SnapOS, described in <code>/etc/snapos</code></td></tr></table>
+<h2>Other downloads</h2>
+<ul><li><a href="https://github.com/snapos-distro/SnapOS/releases">All releases and their notes</a></li><li><a href="https://github.com/snapos-distro/snapos-updates/releases">Update files</a> (what <code>snapos update</code> downloads)</li><li><a href="https://github.com/snapos-distro/SnapOS">Source code</a></li></ul>
+<div class="warn">Do not use versions before 2.0: their base no longer receives security fixes.</div>
+</main>
+<aside class="side">
+<div class="box"><h4>Latest release</h4><div><img alt="latest release" src="https://img.shields.io/github/v/release/snapos-distro/SnapOS?display_name=release&label=&color=e22a1c"><br><a href="https://github.com/snapos-distro/SnapOS/releases/latest">Release notes →</a></div></div>
+<div class="box"><h4>Flashing the USB</h4><ul><li>Use balenaEtcher</li><li>No "ISO mode" tools (in Rufus: DD mode)</li><li>Check the SHA-256 if it does not start</li></ul></div>
+<div class="box"><h4>Installing by hand?</h4><div>The minimal image comes with no installer. <a href="/handbook/install.html">Read the handbook →</a></div></div>
+</aside>
+</div>
+<footer><div class="wrap">
+<div><h5>SnapOS</h5><a href="/">Home</a><a href="/downloads.html">Downloads</a><a href="/news.html">News</a></div>
+<div><h5>Documentation</h5><a href="/handbook/">Handbook</a><a href="/handbook/install.html">Installing by hand</a><a href="https://github.com/snapos-distro/SnapOS#readme">README</a></div>
+<div><h5>Code</h5><a href="https://github.com/snapos-distro/SnapOS">SnapOS</a><a href="https://github.com/snapos-distro/snapos-test">snapos-test</a><a href="https://github.com/snapos-distro/snapos-updates">snapos-updates</a></div>
+<div><h5>Follow</h5><a href="https://www.tiktok.com/@snapos.distro">TikTok</a><a href="https://youtu.be/hVY7DnYpyjY">YouTube</a></div>
+</div><div class="bottom">SnapOS · MIT license · AI assisted (Sonnet 5, Fable 5.1, Opus 5.5)</div></footer></body></html>

@@ -1,25 +1,27 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SnapOS</title><link rel="stylesheet" href="/style.css"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
-<header><nav><a class="brand" href="/"><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png" alt="">SnapOS</a><a href="/handbook/">Handbook</a><a href="https://github.com/snapos-distro/SnapOS/releases/latest">Download</a><a href="https://github.com/snapos-distro">GitHub</a></nav></header>
-<main>
-<h1>SnapOS</h1>
-<p class="tag">The easy road to NixOS.</p>
-<p><a class="btn" href="https://github.com/snapos-distro/SnapOS/releases/latest">Download</a><a class="btn alt" href="/handbook/">Read the handbook</a></p>
-<img class="wide" src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/docs/desktops.gif" alt="The four SnapOS desktops">
-<h2>What is SnapOS?</h2>
-<p>SnapOS is a Linux distribution built on <b>NixOS</b>, with an everyday desktop on top. NixOS describes the whole system in one file and can undo any change, but its commands are hard for someone coming from Ubuntu or Debian. SnapOS keeps the habits you already have (search, install, remove, update) under one command, <code>snapos</code>, and shows you the NixOS way behind each one.</p>
-<div class="grid">
-  <div class="card"><h3>Four desktops</h3>Budgie, KDE Plasma, Xfce or Hyprland, in dark or light.</div>
-  <div class="card"><h3>Safe updates</h3>A new system is built for the next start, and SnapOS goes back by itself if it fails.</div>
-  <div class="card"><h3>SnapGuard</h3>A real-time antivirus based on ClamAV.</div>
-  <div class="card"><h3>.deb programs</h3>A native Debian layer, where even Steam runs.</div>
+<title>SnapOS Linux</title><link rel="stylesheet" href="/style.css"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
+<div class="top"><div class="wrap"><a class="logo" href="/"><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png" alt=""><span><b>snapos</b> linux</span></a><a class="get" href="/downloads.html">Get SnapOS!</a></div></div>
+<div class="menu"><div class="wrap">
+<a href="/" class="on">Home</a><a href="/downloads.html">Downloads</a><a href="/handbook/">Handbook</a><a href="/news.html">News</a><a href="https://github.com/snapos-distro">Source code</a><a href="https://github.com/snapos-distro/SnapOS/issues">Support</a></div></div>
+<div class="hero"><div class="wrap"><h1>Welcome to SnapOS, the easy road to NixOS: a declarative system you can always undo, with the habits you already have.</h1>
+<div class="buttons"><a class="b1" href="/handbook/">Learn more</a><a class="b2" href="/downloads.html">Get started now</a></div></div></div>
+<div class="wrap page"><main>
+<div class="news"><div><h2>SnapGuard comes alive <span class="date">(out 18, 2026)</span></h2><p>Snappy now keeps a cup next to him. A virus that SnapGuard finds falls into it and jumps around, angry. Delete it and Snappy eats it; trust it and it grows wings and flies away. The animations are drawn like Snappy, in ASCII art.</p></div><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snappy-defends.gif" alt=""></div>
+<div class="news"><div><h2>Updates have their own home <span class="date">(out 18, 2026)</span></h2><p>Installed systems now look for updates in <a href="https://github.com/snapos-distro/snapos-updates">snapos-updates</a>, which only holds what <code>snapos update</code> needs. SnapOS also moved to the <a href="https://github.com/snapos-distro">snapos-distro</a> organization, and Hyprland is back to plain tiling.</p></div><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snappy-updates.gif" alt=""></div>
+<div class="news"><div><h2>A native Debian layer <span class="date">(out 3, 2026)</span></h2><p><code>.deb</code> programs run in a Debian layer that works like a Debian computer, with every permission. The protection is SnapGuard, which scans every package before it is installed. Steam works.</p></div><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snappy-deb.gif" alt=""></div>
+<div class="news"><div><h2>The commands people need, under plain names <span class="date">(set 27, 2026)</span></h2><p>SnapOS 2.4 puts the everyday Nix commands behind <code>snapos</code>: find, add, remove, shell, diff, rollback, generations, gc and more. SnapOS is a bridge from Debian-based distros to NixOS.</p></div><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snappy-commands.gif" alt=""></div>
+<p><a href="/news.html">Older news →</a></p></main>
+<aside class="side">
+<div class="box"><h4>Latest release</h4><div><a href="/downloads.html"><img alt="latest release" src="https://img.shields.io/github/v/release/snapos-distro/SnapOS?display_name=release&label=&color=e22a1c"></a><br><a href="/downloads.html">All downloads →</a></div></div>
+<div class="box"><h4>SnapOS at a glance</h4><ul><li>Built on NixOS 26.05</li><li>4 desktops, dark or light</li><li>x86_64 and ARM64</li><li>Updates that undo themselves</li><li>SnapGuard antivirus</li><li><code>.deb</code> programs and Steam</li></ul></div>
+<div class="box"><h4>New here?</h4><div>Coming from Ubuntu or Debian? <code>apt install</code> becomes <code>snapos add</code>. <a href="/handbook/daily.html">See every command</a>.</div></div>
+<div class="box"><h4>Watch</h4><div><a href="https://youtu.be/hVY7DnYpyjY"><img src="https://raw.githubusercontent.com/snapos-distro/.github/main/profile/video.jpg" alt="SnapOS in 50 seconds" style="width:100%;border-radius:4px"></a></div></div>
+</aside>
 </div>
-<h2>Two ways to install</h2>
-<div class="grid">
-  <div class="card"><h3>The installer</h3>Boot the USB and answer eleven questions. <a href="https://github.com/snapos-distro/SnapOS#readme">How it works</a>.</div>
-  <div class="card"><h3>By hand</h3>The minimal USB gives you a terminal, and you build your SnapOS step by step, the NixOS way. <a href="/handbook/install.html">The handbook</a>.</div>
-</div>
-</main>
-<footer>SnapOS · <a href="https://github.com/snapos-distro">github.com/snapos-distro</a> · <a href="https://www.tiktok.com/@snapos.distro">TikTok</a> · <a href="https://youtu.be/hVY7DnYpyjY">YouTube</a><br>AI assisted (Sonnet 5, Fable 5.1, Opus 5.5)</footer>
-</body></html>
+<footer><div class="wrap">
+<div><h5>SnapOS</h5><a href="/">Home</a><a href="/downloads.html">Downloads</a><a href="/news.html">News</a></div>
+<div><h5>Documentation</h5><a href="/handbook/">Handbook</a><a href="/handbook/install.html">Installing by hand</a><a href="https://github.com/snapos-distro/SnapOS#readme">README</a></div>
+<div><h5>Code</h5><a href="https://github.com/snapos-distro/SnapOS">SnapOS</a><a href="https://github.com/snapos-distro/snapos-test">snapos-test</a><a href="https://github.com/snapos-distro/snapos-updates">snapos-updates</a></div>
+<div><h5>Follow</h5><a href="https://www.tiktok.com/@snapos.distro">TikTok</a><a href="https://youtu.be/hVY7DnYpyjY">YouTube</a></div>
+</div><div class="bottom">SnapOS · MIT license · AI assisted (Sonnet 5, Fable 5.1, Opus 5.5)</div></footer></body></html>
