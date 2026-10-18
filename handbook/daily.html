@@ -11,7 +11,7 @@
 <div class="grp">The SnapOS packs</div>
 <a href="packs.html#list">Every pack</a><a href="packs.html#options">Pack options</a><a href="packs.html#full">The full SnapOS</a>
 <div class="grp">Working with your system</div>
-<a href="daily.html#change">Changing the system</a><a href="daily.html#programs">Programs</a><a href="daily.html#updates">Updates</a><a href="daily.html#undo">Undoing</a><a href="daily.html#guard">SnapGuard and .deb files</a><a href="daily.html#trouble">When something breaks</a>
+<a href="daily.html#change">Changing the system</a><a href="daily.html#programs">Programs</a><a href="daily.html#updates">Updates</a><a href="daily.html#undo">Undoing</a><a href="daily.html#guard">SnapGuard and .deb files</a><a href="daily.html#isolated">Is the Debian layer isolated?</a><a href="daily.html#trouble">When something breaks</a>
 </div>
 <h1 class="title">Handbook: Working with your system</h1>
 <p>Every change is a line in a file in <code>/etc/snapos</code>, and every change can be undone. Each task shows the command and, if you added the <b>commands</b> pack, the shorter <code>snapos</code> one.</p>
@@ -45,6 +45,15 @@ sudo snapos-rebuild boot</code></pre>
 <pre><code>snapguard scan ~/Downloads   # scan a folder
 snapguard status             # engine and real-time protection
 snap-deb program.deb         # scanned, then installed in the Debian layer</code></pre>
+<h3 id="isolated">Is the Debian layer isolated?</h3>
+<p>No, on purpose. The Debian layer is a real Debian living next to your system, not a sandbox: a program in it reads and writes your files, uses the screen, sound and devices, and talks to other programs like any native program. That is what lets <code>.deb</code> programs such as Steam work without workarounds.</p>
+<p>What this means:</p>
+<ul>
+<li>Install <code>.deb</code> files you would trust on a Debian or Ubuntu computer. Being in the layer does not make an untrusted program safe.</li>
+<li>SnapGuard scans every <code>.deb</code> before it is installed and puts a known threat in quarantine. It is an extra check, not a wall around the program.</li>
+<li>If you want a program isolated, use a Flatpak or a NixOS option made for that instead.</li>
+<li>Removing the package (<code>snap-deb remove NAME</code>) takes it out of the layer again.</li>
+</ul>
 <h2 id="trouble">When something breaks</h2>
 <pre><code>sudo snapos-rebuild switch --show-trace   # the full error
 snapos doctor    # graphics, boot, network and antivirus (commands pack)
