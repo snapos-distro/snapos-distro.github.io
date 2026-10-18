@@ -156,41 +156,27 @@
     root.appendChild(write);
   }
 
-  function route(refresh) {
+  function route() {
     if (!data) return;
-    var y = window.scrollY;
     var h = location.hash;
     var m = /^#t\/(\d{1,9})$/.exec(h);
-    if (m) { topic(parseInt(m[1], 10)); window.scrollTo(0, refresh ? y : 0); return; }
+    if (m) return topic(parseInt(m[1], 10));
     m = /^#c\/([a-z0-9-]{1,60})$/.exec(h);
     list(m ? m[1] : "");
-    window.scrollTo(0, refresh ? y : 0);
+    window.scrollTo(0, 0);
   }
 
-  window.addEventListener("hashchange", function () { route(false); });
-  var etag = "";
+  window.addEventListener("hashchange", route);
   function get(url, headers) {
     return fetch(url, { headers: headers || {}, cache: "no-cache" })
-      .then(function (r) {
-        if (r.status === 304) return null;                 // nothing changed
-        if (!r.ok) throw new Error(r.status);
-        etag = r.headers.get("ETag") || etag;
-        return r.json();
-      });
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
   }
-  function load(first) {
-    var h = { Accept: "application/vnd.github.raw+json" };
-    if (etag && !first) h["If-None-Match"] = etag;       // a 304 does not count against the API limit
-    return get(API, h).catch(function () { return first ? get(RAW) : null; })
-      .then(function (d) {
-        if (d && typeof d === "object") { data = d; route(true); }
-      });
-  }
-  load(true).catch(function () {
-    root.textContent = "";
-    root.appendChild(bar());
-    root.appendChild(el("p", "forum-empty", "The forum could not be loaded right now. It is on GitHub too."));
-  });
-  // new posts, votes and reactions show up by themselves, every 30 seconds
-  setInterval(function () { if (!document.hidden) load(false).catch(function () {}); }, 30000);
+  get(API, { Accept: "application/vnd.github.raw+json" })
+    .catch(function () { return get(RAW); })
+    .then(function (d) { data = d && typeof d === "object" ? d : { topics: [] }; route(); })
+    .catch(function () {
+      root.textContent = "";
+      root.appendChild(bar());
+      root.appendChild(el("p", "forum-empty", "The forum could not be loaded right now. It is on GitHub too."));
+    });
 })();
