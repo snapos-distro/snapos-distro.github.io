@@ -2,7 +2,9 @@
 // copied as plain text. Everything a writer sent goes in with textContent.
 (function () {
   "use strict";
-  var DATA = "https://raw.githubusercontent.com/snapos-distro/forum/forum-data/forum.json";
+  // the API serves the newest copy (60 s cache); raw.githubusercontent.com is the fallback
+  var API = "https://api.github.com/repos/snapos-distro/forum/contents/forum.json?ref=forum-data";
+  var RAW = "https://raw.githubusercontent.com/snapos-distro/forum/forum-data/forum.json";
   var GH = "https://github.com/snapos-distro/forum/discussions";
   var LOGIN = /^[A-Za-z0-9][A-Za-z0-9-]{0,38}$/;
   var AVATAR = /^https:\/\/avatars\.githubusercontent\.com\//;
@@ -140,9 +142,12 @@
   }
 
   window.addEventListener("hashchange", route);
-  // the minute in the address gets past the 5-minute cache of raw.githubusercontent.com
-  fetch(DATA + "?m=" + Math.floor(Date.now() / 60000), { cache: "no-cache" })
-    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+  function get(url, headers) {
+    return fetch(url, { headers: headers || {}, cache: "no-cache" })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  }
+  get(API, { Accept: "application/vnd.github.raw+json" })
+    .catch(function () { return get(RAW); })
     .then(function (d) { data = d && typeof d === "object" ? d : { topics: [] }; route(); })
     .catch(function () {
       root.textContent = "";
