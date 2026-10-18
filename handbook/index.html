@@ -1,37 +1,37 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Handbook – SnapOS</title><link rel="stylesheet" href="/style.css?v=3"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
+<title>Handbook – SnapOS</title><link rel="stylesheet" href="/style.css?v=4"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
 <div class="top"><div class="wrap"><a class="logo" href="/"><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png" alt=""><span><b>snapos</b></span></a><a class="get" href="/downloads.html">Get SnapOS!</a></div></div>
 <div class="menu"><div class="wrap">
 <a href="/">Home</a><a href="/downloads.html">Downloads</a><a href="/handbook/" class="on">Handbook</a><a href="/news.html">News</a><a href="https://github.com/snapos-distro">Source code</a><a href="https://github.com/snapos-distro/SnapOS/issues">Support</a></div></div>
 <div class="wrap" style="padding:28px 18px 50px">
 <div class="toc"><h4>SnapOS Handbook</h4>
-<div class="grp">Installing by hand</div>
-<a href="install.html#about">About the minimal USB</a><a href="install.html#start">Starting the USB</a><a href="install.html#network">Configuring the network</a><a href="install.html#disks">Preparing the disks</a><a href="install.html#format">Formatting and mounting</a><a href="install.html#init">Preparing SnapOS</a><a href="install.html#choose">Choosing your system</a><a href="install.html#install">Installing</a><a href="install.html#reboot">Restarting</a>
-<div class="grp">Working with SnapOS</div>
-<a href="daily.html#programs">Programs</a><a href="daily.html#changes">Changing the system</a><a href="daily.html#undo">Undoing</a><a href="daily.html#updates">Updates</a><a href="daily.html#guard">SnapGuard and .deb files</a><a href="daily.html#trouble">When something breaks</a>
+<div class="grp">Installing</div>
+<a href="install.html#about">About the installation</a><a href="install.html#media">The minimal USB</a><a href="install.html#network">Configuring the network</a><a href="install.html#disks">Preparing the disks</a><a href="install.html#mount">Formatting and mounting</a><a href="install.html#hardware">The hardware file</a><a href="install.html#flake">Writing flake.nix</a><a href="install.html#config">Writing configuration.nix</a><a href="install.html#boot">The boot loader</a><a href="install.html#users">Users and language</a><a href="install.html#desktop">Choosing a desktop</a><a href="install.html#programs">Programs</a><a href="install.html#addpacks">Adding the SnapOS packs</a><a href="install.html#install">Installing</a><a href="install.html#finish">Finishing</a>
+<div class="grp">The SnapOS packs</div>
+<a href="packs.html#list">Every pack</a><a href="packs.html#options">Pack options</a><a href="packs.html#full">The full SnapOS</a>
+<div class="grp">Working with your system</div>
+<a href="daily.html#change">Changing the system</a><a href="daily.html#programs">Programs</a><a href="daily.html#updates">Updates</a><a href="daily.html#undo">Undoing</a><a href="daily.html#guard">SnapGuard and .deb files</a><a href="daily.html#trouble">When something breaks</a>
 </div>
 <h1 class="title">SnapOS Handbook</h1>
-<p>The SnapOS Handbook is the guide to installing SnapOS by hand from the <b>minimal USB</b> and to living with it afterwards. Every step also says what it is called in NixOS, so what you learn here works on NixOS too.</p>
-<h2>Installing by hand</h2>
+<p>The SnapOS Handbook teaches you to build your own system by hand, the NixOS way, starting from the <b>minimal USB</b>: a terminal and nothing else. You prepare the disk, write the two files that describe the whole computer, choose a desktop and your programs, and then add the <b>SnapOS packs</b> you want: the red look, the <code>snapos</code> commands, SnapGuard, SnapWeb, the Debian layer, the updater. Everything else is yours.</p>
+<p>Nothing here is SnapOS-only knowledge: every step is how NixOS works, so the handbook is also a way into NixOS. If you just want SnapOS ready to use, the <a href="/downloads.html">installer</a> asks eleven questions and does all of this for you.</p>
+<div class="note">The installation steps are typed, one by one, by a virtual machine in the SnapOS test repository whenever the minimal USB, the packs or the handbook's files change. The files shown here are the ones it uses.</div>
+<h2>Installing</h2>
 <dl>
-<dt><a href="install.html#about">About the minimal USB</a></dt><dd>What the minimal image is, and how it differs from the installer.</dd>
-<dt><a href="install.html#network">Configuring the network</a></dt><dd>A cable works by itself; Wi-Fi with <code>nmtui</code>.</dd>
-<dt><a href="install.html#disks">Preparing the disks</a></dt><dd>Finding the disk and making the partitions with <code>parted</code>.</dd>
-<dt><a href="install.html#format">Formatting and mounting</a></dt><dd>File systems, labels, and the new system at <code>/mnt</code>.</dd>
-<dt><a href="install.html#init">Preparing SnapOS</a></dt><dd><code>snapos init</code>: the hardware and the SnapOS files on the disk.</dd>
-<dt><a href="install.html#choose">Choosing your system</a></dt><dd><code>local.nix</code>: name, language, keyboard, desktop, look and users.</dd>
-<dt><a href="install.html#install">Installing</a></dt><dd><code>snapos install</code> builds the system and sets the passwords.</dd>
+<dt><a href="install.html#about">About the installation</a></dt><dd>What you will build, and how it differs from the installer.</dd>
+<dt><a href="install.html#network">Configuring the network</a></dt><dd>Cable, Wi-Fi with <code>nmtui</code>.</dd>
+<dt><a href="install.html#disks">Preparing the disks</a></dt><dd>UEFI or BIOS, partitions with <code>parted</code>, swap.</dd>
+<dt><a href="install.html#hardware">The hardware file</a></dt><dd><code>nixos-generate-config</code>.</dd>
+<dt><a href="install.html#flake">Writing flake.nix</a></dt><dd>Where the system comes from: nixpkgs and the SnapOS packs.</dd>
+<dt><a href="install.html#config">Writing configuration.nix</a></dt><dd>Boot loader, network, users, language, desktop, programs.</dd>
+<dt><a href="install.html#addpacks">Adding the SnapOS packs</a></dt><dd>One line per pack.</dd>
+<dt><a href="install.html#install">Installing</a></dt><dd><code>nixos-install --flake</code>, passwords, first start.</dd>
 </dl>
-<h2>Working with SnapOS</h2>
-<dl>
-<dt><a href="daily.html#programs">Programs</a></dt><dd>Find, add, remove and try programs.</dd>
-<dt><a href="daily.html#changes">Changing the system</a></dt><dd>Edit the files, see the difference, rebuild.</dd>
-<dt><a href="daily.html#undo">Undoing</a></dt><dd>Generations, rollback and cleaning.</dd>
-<dt><a href="daily.html#updates">Updates</a></dt><dd>Releases and packages, and how an update undoes itself.</dd>
-<dt><a href="daily.html#guard">SnapGuard and .deb files</a></dt><dd>The antivirus and the Debian layer.</dd>
-<dt><a href="daily.html#trouble">When something breaks</a></dt><dd>Diagnosis, logs and the full error.</dd>
-</dl>
+<h2>The SnapOS packs</h2>
+<dl><dt><a href="packs.html">Every pack and its options</a></dt><dd>theme, desktops, commands, snapguard, snapweb, debian, helper, updater.</dd></dl>
+<h2>Working with your system</h2>
+<dl><dt><a href="daily.html">Changing it, programs, updates, undoing, troubleshooting</a></dt><dd>With plain NixOS commands, or with the <code>snapos</code> commands if you added that pack.</dd></dl>
 </div>
 <footer><div class="wrap">
 <div><h5>SnapOS</h5><a href="/">Home</a><a href="/downloads.html">Downloads</a><a href="/news.html">News</a></div>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The SnapOS packs – SnapOS Handbook</title><link rel="stylesheet" href="/style.css?v=4"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
+<div class="top"><div class="wrap"><a class="logo" href="/"><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png" alt=""><span><b>snapos</b></span></a><a class="get" href="/downloads.html">Get SnapOS!</a></div></div>
+<div class="menu"><div class="wrap">
+<a href="/">Home</a><a href="/downloads.html">Downloads</a><a href="/handbook/" class="on">Handbook</a><a href="/news.html">News</a><a href="https://github.com/snapos-distro">Source code</a><a href="https://github.com/snapos-distro/SnapOS/issues">Support</a></div></div>
+<div class="wrap" style="padding:28px 18px 50px">
+<div class="toc"><h4>SnapOS Handbook</h4>
+<div class="grp">Installing</div>
+<a href="install.html#about">About the installation</a><a href="install.html#media">The minimal USB</a><a href="install.html#network">Configuring the network</a><a href="install.html#disks">Preparing the disks</a><a href="install.html#mount">Formatting and mounting</a><a href="install.html#hardware">The hardware file</a><a href="install.html#flake">Writing flake.nix</a><a href="install.html#config">Writing configuration.nix</a><a href="install.html#boot">The boot loader</a><a href="install.html#users">Users and language</a><a href="install.html#desktop">Choosing a desktop</a><a href="install.html#programs">Programs</a><a href="install.html#addpacks">Adding the SnapOS packs</a><a href="install.html#install">Installing</a><a href="install.html#finish">Finishing</a>
+<div class="grp">The SnapOS packs</div>
+<a href="packs.html#list">Every pack</a><a href="packs.html#options">Pack options</a><a href="packs.html#full">The full SnapOS</a>
+<div class="grp">Working with your system</div>
+<a href="daily.html#change">Changing the system</a><a href="daily.html#programs">Programs</a><a href="daily.html#updates">Updates</a><a href="daily.html#undo">Undoing</a><a href="daily.html#guard">SnapGuard and .deb files</a><a href="daily.html#trouble">When something breaks</a>
+</div>
+<h1 class="title">Handbook: The SnapOS packs</h1>
+<p>A pack is a part of SnapOS you can add to any NixOS system with one line. Every pack is off until you turn it on. They come from the <code>snapos</code> input of your <code>flake.nix</code>, through <code>snapos.nixosModules.packs</code>.</p>
+<h2 id="list">Every pack</h2>
+<table><tr><th>Pack</th><th>Line</th><th>What it gives you</th></tr>
+<tr><td>theme</td><td><code>snapos.packs.theme.enable = true;</code></td><td>The red GTK theme and icons, dark or light, the SnapOS wallpapers, the login screen look, the boot menu picture, Snappy in <code>fastfetch</code>.</td></tr>
+<tr><td>desktops</td><td><code>snapos.packs.desktops.enable = true;</code></td><td>Budgie, KDE Plasma, Xfce or Hyprland set up the SnapOS way (panel, pinned programs, keys), chosen with <code>snapos.desktop</code>.</td></tr>
+<tr><td>commands</td><td><code>snapos.packs.commands.enable = true;</code></td><td>The <code>snapos</code> command (find, add, remove, list, shell, try, diff, rebuild, rollback, generations, gc, log, doctor), <code>snapctl</code>, and <code>apt</code> that explains the NixOS way.</td></tr>
+<tr><td>snapguard</td><td><code>snapos.packs.snapguard.enable = true;</code></td><td>SnapGuard: ClamAV, the SnapOS deny-list, the window with Snappy, and real-time scans of Downloads and USB drives.</td></tr>
+<tr><td>snapweb</td><td><code>snapos.packs.snapweb.enable = true;</code></td><td>SnapWeb, Firefox with the SnapOS look, as the default browser.</td></tr>
+<tr><td>debian</td><td><code>snapos.packs.debian.enable = true;</code></td><td>The Debian layer: open a <code>.deb</code> (or <code>snap-deb file.deb</code>) and it runs, even Steam.</td></tr>
+<tr><td>helper</td><td><code>snapos.packs.helper.enable = true;</code></td><td>SnapHelper, the short tour at the first login.</td></tr>
+<tr><td>updater</td><td><code>snapos.packs.updater.enable = true;</code></td><td>A window at login when there are new packs, <code>snapos update</code>, and the guard that undoes an update that does not start.</td></tr></table>
+<h2 id="options">Pack options</h2>
+<table><tr><th>Option</th><th>Values</th><th>Used by</th></tr>
+<tr><td><code>snapos.appearance</code></td><td><code>"dark"</code> or <code>"light"</code></td><td>theme, desktops</td></tr>
+<tr><td><code>snapos.desktop</code></td><td><code>"budgie"</code>, <code>"plasma"</code>, <code>"xfce"</code>, <code>"hyprland"</code></td><td>desktops</td></tr>
+<tr><td><code>snapos.security.onInfected</code></td><td><code>"contain"</code> or <code>"warn"</code></td><td>snapguard</td></tr></table>
+<h2 id="full">The full SnapOS</h2>
+<p>The SnapOS that the installer sets up is every pack turned on, plus the SnapOS name and version. In a flake it is <code>snapos.nixosModules.default</code>.</p>
+<h3>How the updater works on your system</h3>
+<p>On a system you built, SnapOS only updates what is SnapOS: the <code>snapos</code> input in your <code>flake.lock</code>. When a SnapOS release comes out, the updater offers it; <code>snapos update</code> moves the input forward, builds the next system for the next start, and goes back by itself if it does not start. Your own programs and nixpkgs are yours to update (see <a href="daily.html#updates">Updates</a>).</p>
+</div>
+<footer><div class="wrap">
+<div><h5>SnapOS</h5><a href="/">Home</a><a href="/downloads.html">Downloads</a><a href="/news.html">News</a></div>
+<div><h5>Documentation</h5><a href="/handbook/">Handbook</a><a href="/handbook/install.html">Installing by hand</a><a href="https://github.com/snapos-distro/SnapOS#readme">README</a></div>
+<div><h5>Code</h5><a href="https://github.com/snapos-distro/SnapOS">SnapOS</a><a href="https://github.com/snapos-distro/snapos-test">snapos-test</a><a href="https://github.com/snapos-distro/snapos-updates">snapos-updates</a></div>
+<div><h5>Follow</h5><a href="https://www.tiktok.com/@snapos.distro">TikTok</a><a href="https://youtu.be/hVY7DnYpyjY">YouTube</a></div>
+</div><div class="bottom">SnapOS · MIT license · AI assisted (Sonnet 5, Fable 5.1, Opus 5.5)</div></footer></body></html>
