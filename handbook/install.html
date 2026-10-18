@@ -52,10 +52,10 @@
 <h2 id="mount">Formatting and mounting</h2>
 <pre><code>sudo mkfs.fat -F 32 -n boot /dev/sda1
 sudo mkfs.ext4 -L nixos /dev/sda2
-sudo mount /dev/disk/by-label/nixos /mnt
+sudo mount /dev/sda2 /mnt
 sudo mkdir -p /mnt/boot
-sudo mount -o umask=077 /dev/disk/by-label/boot /mnt/boot</code></pre>
-<p>Labels (<code>boot</code>, <code>nixos</code>) let the system find its partitions by name. On NVMe the partitions are <code>/dev/nvme0n1p1</code> and <code>p2</code>.</p>
+sudo mount -o umask=077 /dev/sda1 /mnt/boot</code></pre>
+<p>The labels (<code>boot</code>, <code>nixos</code>) name the partitions, so you recognize them later in <code>lsblk -f</code>. On NVMe the partitions are <code>/dev/nvme0n1p1</code> and <code>/dev/nvme0n1p2</code>.</p>
 <h2 id="hardware">The hardware file</h2>
 <pre><code>sudo snapos-generate-config --root /mnt</code></pre>
 <p>This writes <code>/mnt/etc/snapos/hardware-configuration.nix</code> (your disks and the drivers your computer needs) and a first <code>configuration.nix</code>, which you replace in the next steps. You will not need to edit the hardware file.</p>
