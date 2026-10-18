@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Installing – SnapOS Handbook</title><link rel="stylesheet" href="/style.css?v=4"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
+<title>Installing – SnapOS Handbook</title><link rel="stylesheet" href="/style.css?v=5"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
 <div class="top"><div class="wrap"><a class="logo" href="/"><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png" alt=""><span><b>snapos</b></span></a><a class="get" href="/downloads.html">Get SnapOS!</a></div></div>
 <div class="menu"><div class="wrap">
 <a href="/">Home</a><a href="/downloads.html">Downloads</a><a href="/handbook/" class="on">Handbook</a><a href="/news.html">News</a><a href="https://github.com/snapos-distro">Source code</a><a href="https://github.com/snapos-distro/SnapOS/issues">Support</a></div></div>
@@ -15,7 +15,7 @@
 </div>
 <h1 class="title">Handbook: Installing</h1>
 <h2 id="about">About the installation</h2>
-<p>You will build a NixOS system by hand and add SnapOS packs to it. At the end the whole computer is described by two files in <code>/etc/nixos</code>:</p>
+<p>You will build a NixOS system by hand and add SnapOS packs to it. At the end the whole computer is described by two files in <code>/etc/snapos</code>:</p>
 <table><tr><th>File</th><th>What it says</th></tr>
 <tr><td><code>flake.nix</code></td><td>where the system comes from: <b>nixpkgs</b> (every program) and <b>snapos</b> (the packs), and the name of your system</td></tr>
 <tr><td><code>configuration.nix</code></td><td>what the system is: boot, network, users, language, desktop, programs, packs</td></tr>
@@ -24,6 +24,7 @@
 <h2 id="media">The minimal USB</h2>
 <p>Download the minimal image for your computer on the <a href="/downloads.html">Downloads</a> page and flash it with balenaEtcher. Start the computer from the USB stick (often <kbd>F12</kbd>, <kbd>F9</kbd> or <kbd>Esc</kbd> while it turns on). You land in a terminal, logged in as <code>nixos</code>; commands that change the system need <code>sudo</code>.</p>
 <p>The minimal USB is the NixOS minimal ISO with Snappy, the <code>snapos</code> commands and this handbook's address.</p>
+<div class="note">The tools have SnapOS names: <code>snapos-generate-config</code>, <code>snapos-install</code>, <code>snapos-enter</code> and <code>snapos-rebuild</code> run the NixOS ones (<code>nixos-generate-config</code>, <code>nixos-install</code>, <code>nixos-enter</code>, <code>nixos-rebuild</code>), and your system lives in <code>/etc/snapos</code>. <code>/etc/nixos</code> points to it, so NixOS guides work too.</div>
 <h2 id="network">Configuring the network</h2>
 <p>A network cable works by itself. For Wi-Fi:</p>
 <pre><code>nmtui</code></pre>
@@ -56,11 +57,11 @@ sudo mkdir -p /mnt/boot
 sudo mount -o umask=077 /dev/disk/by-label/boot /mnt/boot</code></pre>
 <p>Labels (<code>boot</code>, <code>nixos</code>) let the system find its partitions by name. On NVMe the partitions are <code>/dev/nvme0n1p1</code> and <code>p2</code>.</p>
 <h2 id="hardware">The hardware file</h2>
-<pre><code>sudo nixos-generate-config --root /mnt</code></pre>
-<p>This writes <code>/mnt/etc/nixos/hardware-configuration.nix</code> (your disks and the drivers your computer needs) and a first <code>configuration.nix</code>, which you replace in the next steps. You will not need to edit the hardware file.</p>
+<pre><code>sudo snapos-generate-config --root /mnt</code></pre>
+<p>This writes <code>/mnt/etc/snapos/hardware-configuration.nix</code> (your disks and the drivers your computer needs) and a first <code>configuration.nix</code>, which you replace in the next steps. You will not need to edit the hardware file.</p>
 <h2 id="flake">Writing flake.nix</h2>
-<pre><code>sudo nano /mnt/etc/nixos/flake.nix</code></pre>
-<pre><code># /etc/nixos/flake.nix: where your system comes from.
+<pre><code>sudo nano /mnt/etc/snapos/flake.nix</code></pre>
+<pre><code># /etc/snapos/flake.nix: where your system comes from.
 # nixpkgs gives every program; snapos gives the SnapOS packs.
 {
   inputs = {
@@ -70,7 +71,7 @@ sudo mount -o umask=077 /dev/disk/by-label/boot /mnt/boot</code></pre>
   };
 
   outputs = { nixpkgs, snapos, ... }: {
-    # "mypc" is the name you use with nixos-install and nixos-rebuild
+    # "mypc" is the name you use with snapos-install and snapos-rebuild
     nixosConfigurations.mypc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";            # "aarch64-linux" on an ARM64 computer
       modules = [ snapos.nixosModules.packs ./configuration.nix ];
@@ -80,7 +81,7 @@ sudo mount -o umask=077 /dev/disk/by-label/boot /mnt/boot</code></pre>
 <p><code>nixpkgs</code> is the collection with every program, at the NixOS 26.05 line. <code>snapos</code> brings the packs, and <code>follows</code> makes them use the same nixpkgs as you. <code>mypc</code> is the name of your system: you use it when installing and rebuilding. Save with <kbd>Ctrl</kbd>+<kbd>O</kbd>, close with <kbd>Ctrl</kbd>+<kbd>X</kbd>.</p>
 <h2 id="config">Writing configuration.nix</h2>
 <p>Replace the generated file with your own. The whole file is at the end of this chapter; the next sections explain each part.</p>
-<pre><code>sudo nano /mnt/etc/nixos/configuration.nix</code></pre>
+<pre><code>sudo nano /mnt/etc/snapos/configuration.nix</code></pre>
 <h3 id="boot">The boot loader</h3>
 <pre><code>boot.loader.systemd-boot.enable = true;
 boot.loader.efi.canTouchEfiVariables = true;</code></pre>
@@ -121,7 +122,7 @@ snapos.packs.snapguard.enable = true;  # the antivirus
 snapos.packs.debian.enable = true;     # .deb programs
 snapos.packs.updater.enable = true;    # updates of the packs</code></pre>
 <h3>The whole file</h3>
-<pre><code># /etc/nixos/configuration.nix: your whole system, written by you.
+<pre><code># /etc/snapos/configuration.nix: your whole system, written by you.
 { config, pkgs, ... }:
 
 {
@@ -170,12 +171,12 @@ snapos.packs.updater.enable = true;    # updates of the packs</code></pre>
   system.stateVersion = "26.05";
 }</code></pre>
 <h2 id="install">Installing</h2>
-<pre><code>sudo nixos-install --flake /mnt/etc/nixos#mypc</code></pre>
+<pre><code>sudo snapos-install --flake /mnt/etc/snapos#mypc</code></pre>
 <p>NixOS downloads and builds everything the files describe; this takes a while. At the end it asks a password for <code>root</code>. Then give your user a password:</p>
-<pre><code>sudo nixos-enter --root /mnt -c 'passwd ana'</code></pre>
+<pre><code>sudo snapos-enter --root /mnt -c 'passwd ana'</code></pre>
 <h2 id="finish">Finishing</h2>
 <pre><code>reboot</code></pre>
-<p>Remove the USB stick. Your system starts, and its description lives in <code>/etc/nixos</code>. Next: <a href="daily.html">working with your system</a>.</p>
+<p>Remove the USB stick. Your system starts, and its description lives in <code>/etc/snapos</code>. Next: <a href="daily.html">working with your system</a>.</p>
 </div>
 <footer><div class="wrap">
 <div><h5>SnapOS</h5><a href="/">Home</a><a href="/downloads.html">Downloads</a><a href="/news.html">News</a></div>

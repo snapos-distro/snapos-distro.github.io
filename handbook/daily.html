@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Working with your system – SnapOS Handbook</title><link rel="stylesheet" href="/style.css?v=4"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
+<title>Working with your system – SnapOS Handbook</title><link rel="stylesheet" href="/style.css?v=5"><link rel="icon" href="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png"></head><body>
 <div class="top"><div class="wrap"><a class="logo" href="/"><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snapos-logo.png" alt=""><span><b>snapos</b></span></a><a class="get" href="/downloads.html">Get SnapOS!</a></div></div>
 <div class="menu"><div class="wrap">
 <a href="/">Home</a><a href="/downloads.html">Downloads</a><a href="/handbook/" class="on">Handbook</a><a href="/news.html">News</a><a href="https://github.com/snapos-distro">Source code</a><a href="https://github.com/snapos-distro/SnapOS/issues">Support</a></div></div>
@@ -14,16 +14,16 @@
 <a href="daily.html#change">Changing the system</a><a href="daily.html#programs">Programs</a><a href="daily.html#updates">Updates</a><a href="daily.html#undo">Undoing</a><a href="daily.html#guard">SnapGuard and .deb files</a><a href="daily.html#trouble">When something breaks</a>
 </div>
 <h1 class="title">Handbook: Working with your system</h1>
-<p>Every change is a line in a file in <code>/etc/nixos</code>, and every change can be undone. Each task shows the NixOS command and, if you added the <b>commands</b> pack, the <code>snapos</code> one.</p>
+<p>Every change is a line in a file in <code>/etc/snapos</code>, and every change can be undone. Each task shows the command and, if you added the <b>commands</b> pack, the shorter <code>snapos</code> one.</p>
 <h2 id="change">Changing the system</h2>
 <p>Edit a file, then apply it:</p>
-<table><tr><th>Task</th><th>NixOS</th><th>With the commands pack</th></tr>
-<tr><td>edit the system</td><td><code>sudo nano /etc/nixos/configuration.nix</code></td><td><code>snapos config</code></td></tr>
-<tr><td>see what would change</td><td><code>nixos-rebuild build --flake /etc/nixos#mypc</code></td><td><code>snapos diff</code></td></tr>
-<tr><td>apply now</td><td><code>sudo nixos-rebuild switch --flake /etc/nixos#mypc</code></td><td><code>snapos rebuild</code></td></tr>
-<tr><td>apply at the next start</td><td><code>sudo nixos-rebuild boot --flake /etc/nixos#mypc</code></td><td><code>snapos rebuild --next-boot</code></td></tr></table>
+<table><tr><th>Task</th><th>Command</th><th>With the commands pack</th></tr>
+<tr><td>edit the system</td><td><code>sudo nano /etc/snapos/configuration.nix</code></td><td><code>snapos config</code></td></tr>
+<tr><td>see what would change</td><td><code>snapos-rebuild build</code></td><td><code>snapos diff</code></td></tr>
+<tr><td>apply now</td><td><code>sudo snapos-rebuild switch</code></td><td><code>snapos rebuild</code></td></tr>
+<tr><td>apply at the next start</td><td><code>sudo snapos-rebuild boot</code></td><td><code>snapos rebuild --next-boot</code></td></tr></table>
 <h2 id="programs">Programs</h2>
-<table><tr><th>Task</th><th>NixOS</th><th>With the commands pack</th></tr>
+<table><tr><th>Task</th><th>Command</th><th>With the commands pack</th></tr>
 <tr><td>search</td><td><code>nix search nixpkgs vlc</code></td><td><code>snapos find vlc</code></td></tr>
 <tr><td>install</td><td>add <code>vlc</code> to the list, rebuild</td><td><code>snapos add vlc</code></td></tr>
 <tr><td>remove</td><td>remove it from the list, rebuild</td><td><code>snapos remove vlc</code></td></tr>
@@ -31,22 +31,22 @@
 <p><img src="https://raw.githubusercontent.com/snapos-distro/SnapOS/main/branding/snappy-programs.gif" alt="snapos find and add" style="max-width:100%;border-radius:6px"></p>
 <h2 id="updates">Updates</h2>
 <p>Everything comes from the inputs in <code>flake.lock</code>. To move them all forward and build the result for the next start:</p>
-<pre><code>cd /etc/nixos
+<pre><code>cd /etc/snapos
 sudo nix flake update
-sudo nixos-rebuild boot --flake /etc/nixos#mypc</code></pre>
+sudo snapos-rebuild boot</code></pre>
 <p>With the <b>updater</b> pack, SnapOS tells you at login when there is a new SnapOS release and <code>snapos update</code> moves only the <code>snapos</code> input, with the guard that undoes a failed start.</p>
 <h2 id="undo">Undoing</h2>
 <p>Each rebuild keeps the previous system as a <i>generation</i>, listed in the boot menu.</p>
-<table><tr><th>Task</th><th>NixOS</th><th>With the commands pack</th></tr>
-<tr><td>list them</td><td><code>nixos-rebuild list-generations</code></td><td><code>snapos generations</code></td></tr>
-<tr><td>go back</td><td><code>sudo nixos-rebuild switch --rollback</code></td><td><code>snapos rollback</code></td></tr>
+<table><tr><th>Task</th><th>Command</th><th>With the commands pack</th></tr>
+<tr><td>list them</td><td><code>snapos-rebuild list-generations</code></td><td><code>snapos generations</code></td></tr>
+<tr><td>go back</td><td><code>sudo snapos-rebuild switch --rollback</code></td><td><code>snapos rollback</code></td></tr>
 <tr><td>free space</td><td><code>sudo nix-collect-garbage --delete-older-than 14d</code></td><td><code>snapos gc</code></td></tr></table>
 <h2 id="guard">SnapGuard and .deb files</h2>
 <pre><code>snapguard scan ~/Downloads   # scan a folder
 snapguard status             # engine and real-time protection
 snap-deb program.deb         # scanned, then installed in the Debian layer</code></pre>
 <h2 id="trouble">When something breaks</h2>
-<pre><code>sudo nixos-rebuild switch --flake /etc/nixos#mypc --show-trace   # the full error
+<pre><code>sudo snapos-rebuild switch --show-trace   # the full error
 snapos doctor    # graphics, boot, network and antivirus (commands pack)
 snapos log       # the output of the last rebuild</code></pre>
 <p>If the system does not start, pick an older generation in the boot menu, then fix the file and rebuild.</p>
