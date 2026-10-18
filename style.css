@@ -58,3 +58,33 @@ footer { background: #1c0b0a; color: #bfaaa6; font-size: 13px; }
 footer .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; padding: 26px 18px; }
 footer h5 { color: #fff; margin: 0 0 6px; font-size: 14px; } footer a { color: #f0b5ae; display: block; }
 footer .bottom { text-align: center; padding: 10px; border-top: 1px solid #3a1714; }
+
+/* forum */
+main.wide { max-width: none; }
+.lead { color: #555; }
+.forum-bar { display: flex; gap: 10px; margin: 14px 0; flex-wrap: wrap; }
+.forum-bar .btn { background: #e22a1c; color: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-weight: 600; }
+.forum-bar .btn.ghost { background: #fff; color: #7a1a12; border: 1px solid #d9c9c6; }
+.forum-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.forum-tabs a { padding: 4px 12px; border-radius: 14px; background: #f3eeec; color: #5a2a24; text-decoration: none; font-size: 14px; }
+.forum-tabs a.on { background: #7a1a12; color: #fff; }
+.forum-list { border: 1px solid #e6dcda; border-radius: 6px; }
+.topic { display: flex; justify-content: space-between; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #eee; }
+.topic:last-child { border-bottom: 0; }
+.topic-title { font-size: 17px; font-weight: 600; color: #9b1c12; text-decoration: none; overflow-wrap: anywhere; }
+.topic-meta { font-size: 13px; color: #777; margin-top: 4px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.topic-count { font-size: 13px; color: #777; white-space: nowrap; }
+.tag { font-size: 12px; background: #f3eeec; color: #5a2a24; border-radius: 10px; padding: 1px 8px; }
+.tag.ok { background: #e3f3e3; color: #1d6b2a; }
+.who { display: inline-flex; align-items: center; gap: 5px; }
+.who img { width: 20px; height: 20px; border-radius: 50%; }
+.who a { color: #333; font-weight: 600; text-decoration: none; }
+.back { display: inline-block; margin: 6px 0 10px; color: #9b1c12; text-decoration: none; }
+.topic-h { margin: 4px 0 8px; overflow-wrap: anywhere; }
+.post { border: 1px solid #e6dcda; border-radius: 6px; padding: 12px 14px; margin: 12px 0; }
+.post.first { border-left: 4px solid #e22a1c; }
+.post.reply { margin-left: 32px; background: #fbf9f8; }
+.post-head { font-size: 13px; color: #777; display: flex; gap: 6px; align-items: center; margin-bottom: 8px; }
+.post-text { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
+.forum-empty { color: #777; }
+@media (max-width: 600px) { .post.reply { margin-left: 14px; } .topic { flex-direction: column; gap: 4px; } }
