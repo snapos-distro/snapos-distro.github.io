@@ -8,25 +8,25 @@
 <h1 class="title">Downloads</h1>
 <p>Every image is a USB stick image: flash it with <a href="https://etcher.balena.io">balenaEtcher</a> and start the computer from it. Each one has a <code>.sha256</code> file to check the download.</p>
 <h2>Releases</h2>
-<h3>Installer (net install)</h3>
+<h3>Universal (net install)</h3>
 <p>The installer asks eleven questions (network, keyboard, language, time zone, disk, account, desktop, look, graphics) and installs SnapOS by itself.</p>
 <div class="dl">
-  <div class="card"><h3>x86_64</h3><div class="arch">PCs and laptops with Intel or AMD, BIOS or UEFI</div><a class="btn" href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer.iso">Download</a><div class="small"><a href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer.iso.sha256">SHA-256</a> · about 1.7 GB</div></div>
-  <div class="card"><h3>ARM64</h3><div class="arch">ARM computers that start with UEFI</div><a class="btn" href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer-aarch64.iso">Download</a><div class="small"><a href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer-aarch64.iso.sha256">SHA-256</a> · about 1.7 GB</div></div>
+  <div class="card"><h3>x86_64</h3><div class="arch">PCs and laptops with Intel or AMD, BIOS or UEFI</div><a class="btn" href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer.iso">Download</a><div class="small"><a href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer.iso.sha256">SHA-256</a> · about 1.9 GB</div></div>
+  <div class="card"><h3>ARM64</h3><div class="arch">ARM computers that start with UEFI</div><a class="btn" href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer-aarch64.iso">Download</a><div class="small"><a href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-installer-aarch64.iso.sha256">SHA-256</a> · about 1.9 GB</div></div>
 </div>
-<div class="note">From SnapOS 2.6 the installer downloads the newest SnapOS while it installs, so an older USB stick always installs the latest version. Until then it installs the version on the stick, and SnapOS updates itself after the first start.</div>
-<h3>Minimal</h3>
+<div class="note">The images have no version: with the internet up, the universal image installs the newest SnapOS from <a href="https://github.com/snapos-distro/snapos-updates/releases">snapos-updates</a>, so an old USB stick still installs the latest one. What changed in each version is there too.</div>
+<h3>Manual (minimal)</h3>
 <p>A terminal and no installer with questions: you build your SnapOS step by step, the NixOS way. Smaller and closer to how NixOS works.</p>
 <div class="dl">
-  <div class="card"><h3>x86_64</h3><div class="arch">PCs and laptops with Intel or AMD</div><span class="soon">Arrives with SnapOS 2.6</span></div>
-  <div class="card"><h3>ARM64</h3><div class="arch">ARM computers that start with UEFI</div><span class="soon">Arrives with SnapOS 2.6</span></div>
+  <div class="card"><h3>x86_64</h3><div class="arch">PCs and laptops with Intel or AMD</div><a class="btn" href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-minimal.iso">Download</a><div class="small"><a href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-minimal.iso.sha256">SHA-256</a> · about 1.6 GB</div></div>
+  <div class="card"><h3>ARM64</h3><div class="arch">ARM computers that start with UEFI</div><a class="btn" href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-minimal-aarch64.iso">Download</a><div class="small"><a href="https://github.com/snapos-distro/SnapOS/releases/latest/download/snapos-minimal-aarch64.iso.sha256">SHA-256</a> · about 1.6 GB</div></div>
 </div>
 <p><b>Installing with the minimal image?</b> Follow the handbook: <a href="/handbook/install.html">Installing by hand →</a></p>
 <h2>Which one?</h2>
-<table><tr><th></th><th>Installer</th><th>Minimal</th></tr>
+<table><tr><th></th><th>Universal</th><th>Manual</th></tr>
 <tr><td>For</td><td>Everyone</td><td>People who want to learn how the system is built</td></tr>
 <tr><td>How</td><td>Answer questions</td><td>Type the handbook's commands</td></tr>
-<tr><td>Desktop</td><td>Chosen in the installer</td><td>Chosen in <code>local.nix</code></td></tr>
+<tr><td>Desktop</td><td>Chosen in the installer</td><td>Chosen in <code>configuration.nix</code></td></tr>
 <tr><td>Result</td><td colspan="2">The same SnapOS, described in <code>/etc/snapos</code></td></tr></table>
 <h2>Other downloads</h2>
 <ul><li><a href="https://github.com/snapos-distro/SnapOS/releases">All releases and their notes</a></li><li><a href="https://github.com/snapos-distro/snapos-updates/releases">Update files</a> (what <code>snapos update</code> downloads)</li><li><a href="https://github.com/snapos-distro/SnapOS">Source code</a></li></ul>
