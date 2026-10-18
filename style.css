@@ -88,3 +88,13 @@ main.wide { max-width: none; }
 .post-text { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
 .forum-empty { color: #777; }
 @media (max-width: 600px) { .post.reply { margin-left: 14px; } .topic { flex-direction: column; gap: 4px; } }
+.topic { justify-content: flex-start; }
+.topic-main { flex: 1; min-width: 0; }
+.votes { display: flex; flex-direction: column; align-items: center; min-width: 38px; color: #9b1c12; }
+.votes .arrow { font-size: 13px; line-height: 1; }
+.votes .count { font-weight: 700; font-size: 15px; color: #444; }
+.post { display: flex; gap: 12px; }
+.post-main { flex: 1; min-width: 0; }
+.reactions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.reaction { font-size: 13px; background: #f6f1f0; border: 1px solid #eadfdc; border-radius: 12px; padding: 1px 8px; }
+@media (max-width: 600px) { .topic { flex-direction: row; } }

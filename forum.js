@@ -56,6 +56,23 @@
     });
     return div;
   }
+  function votes(n) {
+    var v = el("div", "votes");
+    v.appendChild(el("span", "arrow", "▲"));
+    v.appendChild(el("span", "count", Math.max(0, n | 0)));
+    v.title = "Upvotes on GitHub";
+    return v;
+  }
+  var EMOJI = { THUMBS_UP: "👍", THUMBS_DOWN: "👎", LAUGH: "😄", HOORAY: "🎉",
+                CONFUSED: "😕", HEART: "❤️", ROCKET: "🚀", EYES: "👀" };
+  function reactions(r) {
+    var row = el("div", "reactions");
+    Object.keys(EMOJI).forEach(function (k) {
+      var n = r && r[k] | 0;
+      if (n > 0) row.appendChild(el("span", "reaction", EMOJI[k] + " " + n));
+    });
+    return row.childNodes.length ? row : null;
+  }
   function categoryName(slug) {
     var c = (data.categories || []).filter(function (x) { return x.slug === slug; })[0];
     return c ? c.name : "";
@@ -86,6 +103,7 @@
     var table = el("div", "forum-list");
     topics.forEach(function (t) {
       var row = el("div", "topic");
+      row.appendChild(votes(t.votes));
       var main = el("div", "topic-main");
       main.appendChild(link("#t/" + t.number, t.title, "topic-title"));
       var meta = el("div", "topic-meta");
@@ -95,6 +113,8 @@
       meta.appendChild(person(t.author));
       meta.appendChild(el("span", "", "· " + ago(t.updated)));
       main.appendChild(meta);
+      var rs = reactions(t.reactions);
+      if (rs) main.appendChild(rs);
       row.appendChild(main);
       row.appendChild(el("div", "topic-count", t.replies + (t.replies === 1 ? " reply" : " replies")));
       table.appendChild(row);
@@ -104,12 +124,17 @@
 
   function post(p, cls) {
     var box = el("div", "post " + (cls || ""));
+    box.appendChild(votes(p.votes));
+    var inner = el("div", "post-main");
+    box.appendChild(inner);
     var head = el("div", "post-head");
     head.appendChild(person(p.author));
     head.appendChild(el("span", "", "· " + ago(p.at || p.created)));
     if (p.answer) head.appendChild(el("span", "tag ok", "Answer"));
-    box.appendChild(head);
-    box.appendChild(body(p.text));
+    inner.appendChild(head);
+    inner.appendChild(body(p.text));
+    var rs = reactions(p.reactions);
+    if (rs) inner.appendChild(rs);
     return box;
   }
 
